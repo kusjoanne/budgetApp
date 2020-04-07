@@ -13,3 +13,5 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`app running on port ${PORT}`)
 });
+
+//https://dev.to/pacheco/my-fullstack-setup-node-js-react-js-and-mongodb-2a4k
