@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 const {Schema} = mongoose;
-const itemSchema = require('./Item');
+
+//this shouldn't be in here
+const itemSchema = new mongoose.Schema({
+  username: String,
+  name: String,
+  amount: Number
+});
 
 const itemDateSchema = new mongoose.Schema({
   username: String,
@@ -8,4 +14,4 @@ const itemDateSchema = new mongoose.Schema({
   items: [itemSchema]
 })
 
-mongoose.model('ItemDate',itemDateSchema);
+mongoose.model('Date',itemDateSchema);

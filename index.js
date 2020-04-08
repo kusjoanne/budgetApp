@@ -3,9 +3,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
+//import your models
 require('./models/Product');
 require('./models/Balance');
-require('./models/ItemDate');
+require('./models/Item');
+require('./models/date');
 
 const app = express();
 const db_name = "budgetAppDB";
@@ -18,9 +20,13 @@ mongoose.connect(process.env.MONGODB_URI || db_url, { useNewUrlParser: true });
 
 app.use(bodyParser.json());
 
+//import the balanceRoutes
 require('./routes/productRoutes')(app);
 require('./routes/balanceRoutes')(app);
-//makes the app production ready
+require('./routes/itemRoutes')(app);
+require('./routes/dateRoutes')(app);
+
+//make the app production ready
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 
