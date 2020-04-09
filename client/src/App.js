@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Header from "./Header";
+import AddItemButton from "./AddItemButton";
+import AddItemModal from "./AddItemModal";
+import Settings from "./Settings";
+import History from "./History";
 // SERVICES
 // import productService from './services/productService';
-import balanceService from './services/balanceService';
 // import dateService from './services/dateService';
 // import itemService from './services/itemService';
 
@@ -65,6 +68,12 @@ function App() {
   return (
     <div className="App">
       <Header />
+      <div>
+        <AddItemButton />
+        <Settings />
+        <History />
+        <AddItemModal />
+      </div>
     </div>
 
   );

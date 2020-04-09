@@ -10,15 +10,13 @@ function Header(){
     }
   })
   const getBalance = async () => {
-    console.log("getBalance called")
     let res = await balanceService.getAll();
-    console.log(res.balance);
     setBalance(res.balance);
   }
   return <header>
     <h1>CURRENT BALANCE</h1>
-    <div class="my-balance card">
-      <div class="card-body">
+    <div className="my-balance card">
+      <div className="card-body">
         {balance}
       </div>
     </div>

@@ -19,7 +19,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGODB_URI || db_url, { useNewUrlParser: true });
 
 app.use(bodyParser.json());
-
+app.use(bodyParser.urlencoded({extended:true}));
 //import the balanceRoutes
 require('./routes/productRoutes')(app);
 require('./routes/balanceRoutes')(app);
