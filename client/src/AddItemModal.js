@@ -22,7 +22,7 @@ function AddItemModal(){
   return   <div className="modal fade" id="addItemModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div className="modal-dialog" role="document">
       <div className="modal-content">
-        <form className="" action="/api/items" method="post">
+        <form className="" action="/api/date" method="post">
           <div className="modal-header">
             <h5 className="modal-title" id="exampleModalLabel">ADD ITEM</h5>
             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
@@ -45,7 +45,7 @@ function AddItemModal(){
           </div>
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" onClick={preventRefesh} id="addItem" className="btn btn-primary">Save changes</button>
+            <button type="submit" id="addItem" className="btn btn-primary">Save changes</button>
           </div>
         </form>
       </div>

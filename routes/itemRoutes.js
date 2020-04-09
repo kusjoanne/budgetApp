@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Item = mongoose.model('Item');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 
 module.exports = (app) => {
   app.get('/api/items', async (req,res) =>{
@@ -29,3 +29,5 @@ module.exports = (app) => {
     })
   });
 };
+
+//keep this file bc you might need to delete items??
