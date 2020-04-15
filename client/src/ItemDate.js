@@ -1,4 +1,5 @@
 import React from "react";
+import Item from "./Item";
 
 function ItemDate(props){
   const items = props.items;
@@ -18,14 +19,8 @@ function ItemDate(props){
         </tr>
       </thead>
       <tbody>
-        {items.map( item => {
-          return <tr>
-            <td>{item.name}</td>
-            <td>{item.amount.toFixed(2)}</td>
-            <td>
-              <input type="image" alt="editIcon" src='https://image.flaticon.com/icons/svg/1159/1159633.svg' className="edit" data-toggle="modal" data-target="#editItemModal" />
-            </td>
-            </tr>;
+        {items.map( (item,index) => {
+          return <Item key={index} id={item._id} itemName={item.name} itemAmount={item.amount.toFixed(2)} itemDate={props.date} />
         })}
       </tbody>
     </table>

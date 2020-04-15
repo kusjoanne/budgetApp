@@ -11,13 +11,13 @@ function Header(){
   })
   const getBalance = async () => {
     let res = await balanceService.getAll();
-    setBalance(res.balance);
+    setBalance(res.balance.toFixed(2));
   }
   return <header>
     <h1>CURRENT BALANCE</h1>
     <div className="my-balance card">
       <div className="card-body">
-        {balance}
+        $ {balance}
       </div>
     </div>
   </header>

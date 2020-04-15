@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 require('./models/Product');
 require('./models/Balance');
 require('./models/Item');
-require('./models/date');
+require('./models/ItemDate');
 
 const app = express();
 const db_name = "budgetAppDB";

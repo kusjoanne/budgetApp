@@ -14,4 +14,4 @@ const itemDateSchema = new mongoose.Schema({
   items: [itemSchema]
 })
 
-mongoose.model('Date',itemDateSchema);
+mongoose.model('ItemDate',itemDateSchema);
