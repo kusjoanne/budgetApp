@@ -44,6 +44,12 @@ module.exports = (app) => {
     updatedBalance.save();
   })
 
+  app.post('/api/date/edit/:item_date/:item_id', async (req,res) => {
+    const itemID = req.params.item_id;
+    const itemDate = req.params.item_date;
+    const formData = req.body;
+    console.log(formData);
+  })
 
   app.post('/api/date/delete/:item_date/:item_id', async (req,res) => {
     const itemID = req.params.item_id;
@@ -63,8 +69,14 @@ module.exports = (app) => {
         });
         updatedBalance.save();
 
+        //If there's no more items delete date
+        if(date.items.length===1){
+          date.remove();
+        } else{
         //Remove Item from this Date
-        currentItem.remove();
+          currentItem.remove();
+        }
+
         date.save(err => {
           if(!err)
             //how to do this without page refresh via react

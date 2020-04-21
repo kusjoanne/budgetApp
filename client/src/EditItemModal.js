@@ -10,7 +10,7 @@ function EditItemModal(props){
   return   <div className="modal fade" id={"editItemModal"+props.id} tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div className="modal-dialog" role="document">
       <div className="modal-content">
-        <form className="" id="editItemForm" action="/api/date" method="post">
+        <form className="" id="editItemForm" action={"/api/date/edit/"+props.itemDate+"/"+props.id} method="post">
           <div className="modal-header">
             <h5 className="modal-title" id="exampleModalLabel">EDIT ITEM</h5>
             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
@@ -33,11 +33,11 @@ function EditItemModal(props){
           </div>
           </form>
           <div className="modal-footer">
-            <button type="button" className="btn btn-secondary" data-dismiss="modal" form="editItemForm">Close</button>
+            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
             <form id="deleteItemForm" action={"/api/date/delete/"+props.itemDate+"/"+props.id} method="post">
-              <button type="submit" id="addItem" className="btn btn-danger">Delete Item</button>
+              <button type="submit" id="deleteItem" className="btn btn-danger">Delete Item</button>
             </form>
-            <button type="submit" id="addItem" className="btn btn-primary">Save changes</button>
+            <button type="submit" id="editItem" className="btn btn-primary" form="editItemForm">Save changes</button>
           </div>
       </div>
           </div>
