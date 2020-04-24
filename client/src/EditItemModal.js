@@ -1,16 +1,32 @@
 import React, {useState} from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import dateService from "./services/dateService";
 
 function EditItemModal(props){
   const [itemName, setItemName] = useState(props.itemName);
   const [itemAmount, setItemAmount] = useState(props.itemAmount);
-  const [startDate, setStartDate] = useState(new Date(props.itemDate));
+  const [itemDate, setItemDate] = useState(new Date(props.itemDate));
+
+  const handleSubmit = (event) =>{
+    event.preventDefault();
+    let myForm = {id:props.id};
+    let formData = new FormData(event.target);
+    formData.forEach(function(value, key){
+        myForm[key] = value;
+    });
+    console.log(myForm);
+    const editItem = async () =>{
+      let res = await dateService.postAll(myForm);
+    }
+
+    editItem();
+  }
 
   return   <div className="modal fade" id={"editItemModal"+props.id} tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div className="modal-dialog" role="document">
       <div className="modal-content">
-        <form className="" id="editItemForm" action={"/api/date/edit/"+props.itemDate+"/"+props.id} method="post">
+        <form onSubmit={handleSubmit} id={"editForm"+props.id}>
           <div className="modal-header">
             <h5 className="modal-title" id="exampleModalLabel">EDIT ITEM</h5>
             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
@@ -28,7 +44,7 @@ function EditItemModal(props){
             </div>
             <div id="item-date">
               <label htmlFor="itemDate"><strong>Date</strong></label>
-              <DatePicker name="itemDate" selected={startDate} onChange={date => setStartDate(date)} />
+              <DatePicker name="itemDate" selected={itemDate} onChange={date => setItemDate(date)} />
             </div>
           </div>
           </form>
@@ -37,7 +53,7 @@ function EditItemModal(props){
             <form id="deleteItemForm" action={"/api/date/delete/"+props.itemDate+"/"+props.id} method="post">
               <button type="submit" id="deleteItem" className="btn btn-danger">Delete Item</button>
             </form>
-            <button type="submit" id="editItem" className="btn btn-primary" form="editItemForm">Save changes</button>
+            <button type="submit" id="editItem" className="btn btn-primary" form={"editForm"+props.id}>Save changes</button>
           </div>
       </div>
           </div>
