@@ -8,25 +8,31 @@ function EditItemModal(props){
   const [itemAmount, setItemAmount] = useState(props.itemAmount);
   const [itemDate, setItemDate] = useState(new Date(props.itemDate));
 
-  const handleSubmit = (event) =>{
+  const handleEdit = (event) =>{
     event.preventDefault();
-    let myForm = {id:props.id};
+    let myForm = {id:props.id,originalDate:props.itemDate};
     let formData = new FormData(event.target);
     formData.forEach(function(value, key){
         myForm[key] = value;
     });
-    console.log(myForm);
     const editItem = async () =>{
-      let res = await dateService.postAll(myForm);
+      let res = await dateService.edit(myForm);
     }
-
     editItem();
+  }
+
+  const handleDelete = (event) =>{
+    event.preventDefault();
+    const deleteItem = async () =>{
+      let res = await dateService.delete({id:props.id, date:props.itemDate});
+    }
+    deleteItem();
   }
 
   return   <div className="modal fade" id={"editItemModal"+props.id} tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div className="modal-dialog" role="document">
       <div className="modal-content">
-        <form onSubmit={handleSubmit} id={"editForm"+props.id}>
+        <form onSubmit={handleEdit} id={"editForm"+props.id}>
           <div className="modal-header">
             <h5 className="modal-title" id="exampleModalLabel">EDIT ITEM</h5>
             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
@@ -47,13 +53,13 @@ function EditItemModal(props){
               <DatePicker name="itemDate" selected={itemDate} onChange={date => setItemDate(date)} />
             </div>
           </div>
+        </form>
+        <div className="modal-footer">
+          <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+          <form onSubmit={handleDelete} id={"deleteForm"+props.id}>
+            <button type="submit" id="deleteItem" className="btn btn-danger">Delete Item</button>
           </form>
-          <div className="modal-footer">
-            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-            <form id="deleteItemForm" action={"/api/date/delete/"+props.itemDate+"/"+props.id} method="post">
-              <button type="submit" id="deleteItem" className="btn btn-danger">Delete Item</button>
-            </form>
-            <button type="submit" id="editItem" className="btn btn-primary" form={"editForm"+props.id}>Save changes</button>
+          <button type="submit" id="editItem" className="btn btn-primary" form={"editForm"+props.id}>Save changes</button>
           </div>
       </div>
           </div>

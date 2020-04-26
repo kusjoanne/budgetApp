@@ -5,10 +5,12 @@ export default {
     let res = await axios.get('/api/date');
     return res.data || [];
   },
-  postAll: async (myForm) => {
+  edit: async (myForm) => {
     let res = await axios.post('/api/date/edit',myForm);
-    console.log("Hello from service");
-    console.log(test);
+    return res;
+  },
+  delete: async (req) => {
+    let res = await axios.post('/api/date/delete',req);
     return res;
   }
 }
