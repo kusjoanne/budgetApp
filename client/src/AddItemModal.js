@@ -4,26 +4,26 @@ import History from "./History";
 import dateService from "./services/dateService";
 import "react-datepicker/dist/react-datepicker.css";
 
-function handleAdd(event){
-  event.preventDefault();
-  let myForm = {};
-  let formData = new FormData(event.target);
-  formData.forEach(function(value, key){
-      myForm[key] = value;
-  });
-
-  const addItem = async ()=>{
-    let res = await dateService.add(myForm);
-    
-  }
-  addItem();
-}
-
-function AddItemModal(){
+function AddItemModal(props){
   const [itemName, setItemName] = useState('');
   const [itemAmount, setItemAmount] = useState('');
   const [startDate, setStartDate] = useState(new Date());
 
+  function handleAdd(event){
+    event.preventDefault();
+    let myForm = {};
+    let formData = new FormData(event.target);
+    formData.forEach(function(value, key){
+        myForm[key] = value;
+    });
+
+    const addItem = async ()=>{
+      let res = await dateService.add(myForm);
+
+    }
+    addItem();
+    props.refreshItemDates();
+  }
   return   <div className="modal fade" id="addItemModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div className="modal-dialog" role="document">
       <div className="modal-content">

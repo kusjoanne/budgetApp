@@ -27,6 +27,7 @@ function EditItemModal(props){
       let res = await dateService.delete({id:props.id, date:props.itemDate});
     }
     deleteItem();
+    props.refreshItemDates();
   }
 
   return   <div className="modal fade" id={"editItemModal"+props.id} tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
