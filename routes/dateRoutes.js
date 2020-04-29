@@ -45,6 +45,7 @@ module.exports = (app) => {
       updateDate: Date()
     });
     updatedBalance.save();
+    return res.status(200).send(item);
   })
 
 ////////////////////EDIT ITEM////////////////////////////////////

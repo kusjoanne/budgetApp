@@ -8,7 +8,7 @@ function History(){
   useEffect(()=>{
     if(allItemDates.length <= 0)
       getAllItemDates();
-  });
+  },allItemDates);
 
   //returns ALL of the dates
   const getAllItemDates = async () => {

@@ -7,14 +7,14 @@ export default {
   },
   add: async (myForm) => {
     let res = await axios.post('/api/date',myForm);
-    return res;
+    return res.data || [];
   },
   edit: async (myForm) => {
     let res = await axios.post('/api/date/edit',myForm);
-    return res;
+    return res.data || [];
   },
   delete: async (req) => {
     let res = await axios.post('/api/date/delete',req);
-    return res;
+    return res.data || [];
   }
 }

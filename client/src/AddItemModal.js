@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import DatePicker from "react-datepicker";
+import History from "./History";
 import dateService from "./services/dateService";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -13,6 +14,7 @@ function handleAdd(event){
 
   const addItem = async ()=>{
     let res = await dateService.add(myForm);
+    
   }
   addItem();
 }
