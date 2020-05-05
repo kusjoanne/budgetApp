@@ -91,11 +91,11 @@ module.exports = (app) => {
 
     //Update the balance if the amount chages
     oDate.save();
+    res.end();
   })
 
 ////////////////////DELETE ITEM//////////////////////////////////
   app.post('/api/date/delete', async (req,res) => {
-    console.log(req.body);
     const itemID = req.body.id;
     const itemDate = req.body.date;
     let latestBalance = await Balance.findOne().sort('-updateDate');
@@ -124,7 +124,7 @@ module.exports = (app) => {
         date.save(err => {
           if(!err)
             //how to do this without page refresh via react
-            res.redirect('/');
+            return res.status(200).send("successful");
         });
       }
     });

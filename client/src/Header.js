@@ -1,23 +1,12 @@
-import React, {useState, useEffect} from 'react';
-import balanceService from './services/balanceService';
+import React from 'react';
 
-function Header(){
-  const [balance, setBalance] = useState('');
+function Header(props){
 
-  useEffect(() => {
-    if(!balance) {
-      getBalance();
-    }
-  })
-  const getBalance = async () => {
-    let res = await balanceService.getAll();
-    setBalance(res.balance.toFixed(2));
-  }
   return <header>
     <h1>CURRENT BALANCE</h1>
     <div className="my-balance card">
       <div className="card-body">
-        $ {balance}
+        $ {props.balance}
       </div>
     </div>
   </header>

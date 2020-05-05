@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import DatePicker from "react-datepicker";
-import History from "./History";
 import dateService from "./services/dateService";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -18,12 +17,15 @@ function AddItemModal(props){
     });
 
     const addItem = async ()=>{
-      let res = await dateService.add(myForm);
-
+      await dateService.add(myForm);
+      setItemName('');
+      setItemAmount('');
+      props.getBalance();
+      props.refreshItemDates();
     }
     addItem();
-    props.refreshItemDates();
   }
+
   return   <div className="modal fade" id="addItemModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div className="modal-dialog" role="document">
       <div className="modal-content">

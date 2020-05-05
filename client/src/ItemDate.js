@@ -20,7 +20,7 @@ function ItemDate(props){
       </thead>
       <tbody>
         {items.map( (item,index) => {
-          return <Item key={index} id={item._id} itemName={item.name} itemAmount={item.amount.toFixed(2)} itemDate={props.date} refreshItemDates={props.refreshItemDates}/>
+          return <Item key={index} id={item._id} itemName={item.name} itemAmount={item.amount.toFixed(2)} itemDate={props.date} refreshItemDates={props.refreshItemDates} getBalance={props.getBalance}/>
         })}
       </tbody>
     </table>

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export default {
   getAll: async () => {
-    let res = await axios.get('/api/date');
+    let res = await axios.get('/api/date').catch(err=>{console.log(err)});
     return res.data || [];
   },
   add: async (myForm) => {
@@ -14,7 +14,7 @@ export default {
     return res.data || [];
   },
   delete: async (req) => {
-    let res = await axios.post('/api/date/delete',req);
+    let res = await axios.post('/api/date/delete',req).catch(err=>{console.log(err)});
     return res.data || [];
   }
 }
