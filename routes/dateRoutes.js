@@ -40,20 +40,19 @@ module.exports = (app) => {
     //updateBalance
     let latestBalance = await Balance.findOne().sort('-updateDate');
     const newBalanceAmount = latestBalance.balance-itemAmount;
-    const updatedBalance = new Balance({
-      balance:newBalanceAmount,
-      updateDate: Date()
-    });
-    updatedBalance.save();
+    latestBalance.balance = newBalanceAmount;
+    latestBalance.save();
+
     return res.status(200).send(item);
   })
 
 ////////////////////EDIT ITEM////////////////////////////////////
   app.post('/api/date/edit', async (req,res) => {
+    let itemID = req.body.id;
     let itemName = req.body.itemName;
     let itemAmount = req.body.itemAmount;
+    let originalAmount = req.body.originalAmount;
     let itemDate = new Date(req.body.itemDate);
-    let itemID = req.body.id;
     let originalDate = new Date(req.body.originalDate);
 
     let oDate = await ItemDate.findOne({date:originalDate});
@@ -81,6 +80,7 @@ module.exports = (app) => {
         createdDate.save();
       }
 
+      //If this is the last item left for this date delete date
       if(oDate.items.length===1){
         oDate.remove();
       } else{
@@ -89,7 +89,15 @@ module.exports = (app) => {
       }
     }
 
-    //Update the balance if the amount chages
+    //Update Balance if different from original
+    if(originalAmount!=itemAmount){
+      let latestBalance = await Balance.findOne().sort('-updateDate');
+      const difference = originalAmount-itemAmount;
+      const newBalanceAmount = latestBalance.balance+difference;
+      latestBalance.balance = newBalanceAmount;
+      latestBalance.save();
+    }
+
     oDate.save();
     res.end();
   })
@@ -105,13 +113,9 @@ module.exports = (app) => {
         const currentItem = date.items.id(itemID);
 
         //Update Balance
-        //We probably don't need to keep a new record for each time the balance is updated...
         const newBalanceAmount = latestBalance.balance+currentItem.amount;
-        const updatedBalance = new Balance({
-          balance:newBalanceAmount,
-          updateDate: Date()
-        });
-        updatedBalance.save();
+        latestBalance.balance = newBalanceAmount;
+        latestBalance.save();
 
         //If there's no more items delete date
         if(date.items.length===1){
@@ -121,12 +125,9 @@ module.exports = (app) => {
           currentItem.remove();
         }
 
-        date.save(err => {
-          if(!err)
-            //how to do this without page refresh via react
-            return res.status(200).send("successful");
-        });
+        date.save();
       }
     });
+    return res.status(200).send("successful");
   })
 }

@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import DatePicker from "react-datepicker";
 import dateService from "./services/dateService";
 import "react-datepicker/dist/react-datepicker.css";
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 function AddItemModal(props){
   const [itemName, setItemName] = useState('');
@@ -26,38 +28,35 @@ function AddItemModal(props){
     addItem();
   }
 
-  return   <div className="modal fade" id="addItemModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div className="modal-dialog" role="document">
-      <div className="modal-content">
-        <form className=""  id="addForm" onSubmit={handleAdd}>
-          <div className="modal-header">
-            <h5 className="modal-title" id="exampleModalLabel">ADD ITEM</h5>
-            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div className="modal-body">
-            <div id="item-name">
-              <label htmlFor="itemName"><strong>Item Name</strong></label>
-              <input type="text" name="itemName" value={itemName} className="itemName" onChange={itemName => setItemName(itemName.target.value)}/>
-            </div>
-            <div id="item-amount">
-              <label htmlFor="itemAmount"><strong>Amount</strong></label>
-              <input type="text" name="itemAmount" value={itemAmount} className="itemAmount" onChange={itemAmount => setItemAmount(itemAmount.target.value)} />
-            </div>
-            <div id="item-date">
-              <label htmlFor="itemDate"><strong>Date</strong></label>
-              <DatePicker name="itemDate" selected={startDate} onChange={date => setStartDate(date)} />
-            </div>
-          </div>
-          <div className="modal-footer">
-            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" id="addItem" form="addForm" className="btn btn-primary">Save changes</button>
-          </div>
-        </form>
-      </div>
-          </div>
+  return <Modal show={props.show} onHide={props.onHide} animation={true} centered>
+    <Modal.Header closeButton>
+      <Modal.Title>ADD ITEM</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+      <form className=""  id="addForm" onSubmit={handleAdd}>
+        <div id="item-name">
+          <label htmlFor="itemName"><strong>Item Name</strong></label>
+          <input type="text" name="itemName" value={itemName} className="itemName" onChange={itemName => setItemName(itemName.target.value)}/>
         </div>
+        <div id="item-amount">
+          <label htmlFor="itemAmount"><strong>Amount</strong></label>
+          <input type="text" name="itemAmount" value={itemAmount} className="itemAmount" onChange={itemAmount => setItemAmount(itemAmount.target.value)} />
+        </div>
+        <div id="item-date">
+          <label htmlFor="itemDate"><strong>Date</strong></label>
+          <DatePicker name="itemDate" selected={startDate} onChange={date => setStartDate(date)} />
+        </div>
+      </form>
+    </Modal.Body>
+    <Modal.Footer>
+      <Button variant="secondary" onClick={props.onHide}>
+        Close
+      </Button>
+      <Button variant="primary" onClick={props.onHide} type="submit" id="addItem" form="addForm">
+        Save Changes
+      </Button>
+    </Modal.Footer>
+  </Modal>
 }
 
 export default AddItemModal;

@@ -1,7 +1,6 @@
 import React, {useState,useEffect} from "react";
 import Header from "./Header";
 import AddItemButton from "./AddItemButton";
-import AddItemModal from "./AddItemModal";
 import Settings from "./Settings";
 import History from "./History";
 import dateService from "./services/dateService";
@@ -32,10 +31,9 @@ function App() {
     <div className="App">
       <Header balance={balance} />
       <div>
-        <AddItemButton />
+        <AddItemButton refreshItemDates={getAllItemDates} getBalance={getBalance}/>
         <Settings />
         <History allItemDates={allItemDates} setAllItemDates={setAllItemDates} refreshItemDates={getAllItemDates}  getBalance={getBalance}/>
-        <AddItemModal refreshItemDates={getAllItemDates} getBalance={getBalance}/>
       </div>
     </div>
 

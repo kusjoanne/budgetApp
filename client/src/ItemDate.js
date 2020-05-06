@@ -7,7 +7,7 @@ function ItemDate(props){
   let date = new Date(props.date);
   date = date.toLocaleDateString('en-US',options);
 
-  return<div>
+  return<>
     <h2>{date}</h2>
     <br />
     <table className="table table-striped">
@@ -25,7 +25,7 @@ function ItemDate(props){
       </tbody>
     </table>
     <br />
-  </div>
+  </>
 }
 
 export default ItemDate;
